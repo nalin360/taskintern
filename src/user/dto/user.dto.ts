@@ -1,10 +1,10 @@
-import { IsInt, IsString } from 'class-validator';
+import { IsInt, IsString, IsBoolean, IsNotEmpty, IsObject, IsEmail } from 'class-validator';
 
 export class UserDto {
     @IsInt()
     userId: number;
 
-    @IsString()
+    // @IsEmail()
     username: string;
 
     @IsString()
@@ -15,10 +15,27 @@ export class UserDto {
 }
 
 export class CheckUserDto {
-   
-    @IsString()
+    @IsNotEmpty()
+    // @IsEmail()
     username: string;
 
-   
+}
+
+
+export class IsUserDto {
+
+    @IsNotEmpty()
+    @IsBoolean()
+    success: Boolean;
+
+    @IsNotEmpty()
+    @IsObject()
+    user: Object;
+}
+
+export class IsUserFail {
+    @IsNotEmpty()
+    @IsBoolean()
+    success: Boolean;
 }
 
