@@ -14,10 +14,10 @@ export class UserController {
 
     @Post('login')
     async validateUser(@Body() checkUserDto:CheckUserDto):Promise<IsUserFail>{
-        const users = await this.userService.findOnes(checkUserDto)
+        const validUsers = await this.userService.findOnes(checkUserDto)
         // console.log(users);
         // is user exits { success: true } if null false
-        if (users) {
+        if (validUsers) {
             return { success: true };
           } else {
             return { success: false };
