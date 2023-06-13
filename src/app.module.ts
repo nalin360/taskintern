@@ -7,11 +7,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserController } from './user/user.controller';
 import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
+import { TaskService } from './task/task.service';
 
 
 @Module({
   imports: [TaskModule , MongooseModule.forRoot('mongodb://127.0.0.1:27017/task'), UserModule],
-  controllers: [AppController, TaskController, UserController],
-  providers: [AppService, UserService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
