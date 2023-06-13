@@ -13,12 +13,12 @@ export class TaskController {
     }
 
     @Post()
-    setTask(@Body() setTaskDto: CreateTaskDto) {
+    async setTask(@Body() setTaskDto: CreateTaskDto) {
         return this.taskService.createTask(setTaskDto);
     }
 
     @Patch(':name')
-    updateTask(@Param('name') name: string, @Body() updateTaskDto: UpdateTaskDto) {
+    async updateTask(@Param('name') name: string, @Body() updateTaskDto: UpdateTaskDto) {
         return this.taskService.updateTask(name, updateTaskDto);
     }
 
