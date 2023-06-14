@@ -1,7 +1,7 @@
-import { Body, Controller,Get,Post} from '@nestjs/common';
-import { CheckUserDto, IsUserDto, IsUserFail } from './dto/user.dto';
+import { Body, Controller,Post} from '@nestjs/common';
+import { CheckUserDto, IsUserFail } from './dto/user.dto';
 import { UserService } from './user.service';
-import { async } from 'rxjs';
+
 
 @Controller('user')
 export class UserController {
@@ -16,7 +16,7 @@ export class UserController {
     async validateUser(@Body() checkUserDto:CheckUserDto):Promise<IsUserFail>{
         const validUsers = await this.userService.findOnes(checkUserDto)
         // console.log(users);
-        // is user exits { success: true } if null false
+        // is user exits { success: true } if null false vedik01010@/NS420
         if (validUsers) {
             return { success: true };
           } else {
