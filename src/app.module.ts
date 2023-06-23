@@ -1,24 +1,30 @@
-import { Module } from '@nestjs/common';
+import { Module ,NestModule, MiddlewareConsumer} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TaskController } from './task/task.controller';
 import { TaskModule } from './task/task.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserController } from './user/user.controller';
-import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
-import { TaskService } from './task/task.service';
-import { T1Controller } from './t1/t1.controller';
-import { T1Service } from './t1/t1.service';
-import { T2Controller } from './t2/t2.controller';
 import { T2Module } from './t2/t2.module';
+import { MidwayModule } from './midway/midway.module';
+import { LoggerMiddleware } from './middleware/logger.middleware';
+import { InterceptorModule } from './interceptor/interceptor.module';
+import { FeedbackController } from './feedback/feedback.controller';
+import { FeedbackService } from './feedback/feedback.service';
+import { FeedbackModule } from './feedback/feedback.module';
+
 
 
 @Module({
   imports: [TaskModule , 
     MongooseModule.forRoot('mongodb://127.0.0.1:27017/task'), 
-    UserModule,T2Module],
+    UserModule,T2Module,MidwayModule, InterceptorModule, FeedbackModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule{
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes('/midway');
+  }
+}
