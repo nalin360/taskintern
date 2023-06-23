@@ -1,4 +1,9 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class InterceptorService {}
+export class InterceptorService {
+
+    getUser(){
+        return "user";
+    }
+}
